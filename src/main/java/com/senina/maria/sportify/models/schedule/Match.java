@@ -9,7 +9,7 @@ public class Match {
     @JsonProperty("match_start")
     private String matchStart;
     @JsonProperty("league_id")
-    private String leagueId;
+    private int leagueId;
     @JsonProperty("season_id")
     private String seasonId;
     private Stage stage;
@@ -27,11 +27,11 @@ public class Match {
         this.matchStart = matchStart;
     }
 
-    public String getLeagueId() {
+    public int getLeagueId() {
         return leagueId;
     }
 
-    public void setLeagueId(String leagueId) {
+    public void setLeagueId(int leagueId) {
         this.leagueId = leagueId;
     }
 
