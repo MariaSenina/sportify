@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
         <title>Home</title>
     </head>
@@ -8,14 +8,25 @@
         <p>“Sportify” collects schedules of user’s favourite teams/leagues and displays them all in one place.</p>
         <table style="text-align:center; margin-left:auto; margin-right:auto">
             <tr>
-                <th colspan='5'> July 12th, 2022 </th>
+                <th colspan='7'th:text="${#dates.format(#dates.createNow(), 'dd MMM yyyy')}"> </th>
             </tr>
             <tr>
-                <th> Location </th>
+                <th> Match Start </th>
+                <th> League ID </th>
+                <th> Stage </th>
                 <th> Home Team </th>
-                <th> </th>
                 <th> Away Team </th>
-                <th> Local Time </th>
+                <th> Venue </th>
+                <th> City </th>
+            </tr>
+            <tr th:each="match : ${matches}">
+                <td th:text="${match.matchStart}">I'll be shown if match.matchStart doesn't exist</td>
+                <td th:text="${match.leagueId}">I'll be shown if match.leagueId doesn't exist</td>
+                <td th:text="${match.stage.name}">I'll be shown if match.stage.name doesn't exist</td>
+                <td th:text="${match.homeTeam.name}">I'll be shown if match.homeTeam.name doesn't exist</td>
+                <td th:text="${match.awayTeam.name}">I'll be shown if match.awayTeam.name doesn't exist</td>
+                <td th:text="${match?.venue?.name}">I'll be shown if match.venue.name doesn't exist</td>
+                <td th:text="${match?.venue?.city}">I'll be shown if match.venue.city doesn't exist</td>
             </tr>
         </table>
     </body>

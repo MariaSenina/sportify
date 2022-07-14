@@ -1,6 +1,7 @@
 package com.senina.maria.sportify.services;
 
 import com.senina.maria.sportify.models.schedule.Match;
+import com.senina.maria.sportify.models.schedule.MatchResponse;
 import com.senina.maria.sportify.repositories.ScheduleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,14 @@ public class SportDataApiScheduleService implements ScheduleService {
     }
 
     @Override
-    public List<Match> findBySeasonAndDate(int seasonId, String fromDate, String toDate) throws IOException {
-        return scheduleRepository.findBySeasonAndDate(seasonId, fromDate, toDate);
+    public MatchResponse findBySeasonAndDate(int seasonId, String fromDate, String toDate) throws IOException {
+        return mapToMatchResponse(scheduleRepository.findBySeasonAndDate(seasonId, fromDate, toDate));
+    }
+
+    private MatchResponse mapToMatchResponse(List<Match> matches) {
+        MatchResponse matchResponse = new MatchResponse();
+        matchResponse.setMatches(matches);
+
+        return matchResponse;
     }
 }
