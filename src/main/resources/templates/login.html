@@ -17,14 +17,15 @@
       </div>
     </nav>
     <div class="d-flex justify-content-center m-4 align-items-center">
-      <form>
+      <form action="./login" method="post">
         <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">Email address</label>
-          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+          <label for="email" class="form-label">Email address</label>
+          <input type="email" class="form-control" id="email" name="email"
+                 pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required aria-required="true" aria-describedby="emailHelp">
         </div>
         <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">Password</label>
-          <input type="password" class="form-control" id="exampleInputPassword1">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" class="form-control" id="password" name="password" required aria-required="true">
         </div>
         <button type="submit" class="btn btn-outline-success">Login</button>
       </form>
