@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Map;
 
 @Controller
@@ -26,6 +27,7 @@ public class LeagueController {
         User user = (User) session.getAttribute("user");
 
         Map<String, Object> scheduleMap = scheduleService.findByLeagueId(leagueId);
+        model.addAttribute("today", LocalDate.now());
         model.addAttribute("matches", scheduleMap.get("match"));
         model.addAttribute("league", scheduleMap.get("league"));
         model.addAttribute("user", user);

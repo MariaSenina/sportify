@@ -14,12 +14,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Map;
 import java.util.Optional;
 
 @Controller
 @RequestMapping("/login")
 public class LoginController {
+    private static final int LEAGUE_ID = 663;
+
     private UserService userService;
     private ScheduleService scheduleService;
 
@@ -43,7 +46,8 @@ public class LoginController {
         if (user.isPresent()) {
             session.setAttribute("user", user.get());
 
-            Map<String, Object> scheduleMap = scheduleService.findByLeagueId(290);
+            Map<String, Object> scheduleMap = scheduleService.findByLeagueId(LEAGUE_ID);
+            model.addAttribute("today", LocalDate.now());
             model.addAttribute("matches", scheduleMap.get("match"));
             model.addAttribute("league", scheduleMap.get("league"));
             model.addAttribute("user", user.get());
