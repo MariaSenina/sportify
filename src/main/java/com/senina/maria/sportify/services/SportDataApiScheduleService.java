@@ -40,7 +40,7 @@ public class SportDataApiScheduleService implements ScheduleService {
     }
 
     public Map<String, Object> findByLeagueId(Integer leagueId) throws IOException {
-        int seasonId = seasonService.findByLeagueId(leagueId).get(1).getSeasonId();
+        int seasonId = seasonService.findByLeagueId(leagueId).getSeasonId();
         MatchResponse matchResponse = findBySeasonAndDate(seasonId, "2022-07-12", "2022-09-23");
         LeagueResponse leagueResponse = leagueService.findById(leagueId);
 

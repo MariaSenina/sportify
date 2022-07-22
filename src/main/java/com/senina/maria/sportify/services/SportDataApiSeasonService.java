@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SportDataApiSeasonService implements SeasonService {
@@ -18,7 +19,11 @@ public class SportDataApiSeasonService implements SeasonService {
     }
 
     @Override
-    public List<Season> findByLeagueId(int leagueId) throws IOException {
-        return seasonRepository.findByLeagueId(leagueId);
+    public Season findByLeagueId(int leagueId) throws IOException {
+        List<Season> seasons = seasonRepository.findByLeagueId(leagueId);
+        Optional<Season> currentSeason
+                = seasons.stream().filter(season -> season.isCurrent() == 1).findFirst();
+
+        return currentSeason.get();
     }
 }

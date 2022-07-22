@@ -3,7 +3,7 @@ package com.senina.maria.sportify.models.season;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-@JsonIgnoreProperties(value = {"is_current", "league_id", "name"})
+@JsonIgnoreProperties(value = {"league_id", "name"})
 public class Season {
     @JsonProperty("season_id")
     private int seasonId;
@@ -13,6 +13,8 @@ public class Season {
     private String startDate;
     @JsonProperty("end_date")
     private String endDate;
+    @JsonProperty("is_current")
+    private Integer current;
 
     public int getSeasonId() {
         return seasonId;
@@ -46,6 +48,14 @@ public class Season {
         this.endDate = endDate;
     }
 
+    public Integer isCurrent() {
+        return current;
+    }
+
+    public void setIsCurrent(Integer current) {
+        this.current = current;
+    }
+
     @Override
     public String toString() {
         return "Season{" +
@@ -53,6 +63,7 @@ public class Season {
                 ", countryId=" + countryId +
                 ", startDate='" + startDate + '\'' +
                 ", endDate='" + endDate + '\'' +
+                ", current='" + current + '\'' +
                 '}';
     }
 }
