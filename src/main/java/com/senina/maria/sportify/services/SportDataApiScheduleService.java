@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,8 +30,16 @@ public class SportDataApiScheduleService implements ScheduleService {
     }
 
     @Override
-    public MatchResponse findBySeasonAndDate(int seasonId, String fromDate, String toDate) throws IOException {
-        return mapToMatchResponse(scheduleRepository.findBySeasonAndDate(seasonId, fromDate, toDate));
+    public MatchResponse findBySeasonAndDate(int seasonId, String fromDate, String toDate) {
+        List<Match> matches = new ArrayList();
+
+        try {
+            matches = scheduleRepository.findBySeasonAndDate(seasonId, fromDate, toDate);
+        } catch (Exception exception) {
+            System.out.println("An exception has occurred: " + exception);
+        }
+
+        return mapToMatchResponse(matches);
     }
 
     private MatchResponse mapToMatchResponse(List<Match> matches) {
@@ -41,7 +51,8 @@ public class SportDataApiScheduleService implements ScheduleService {
 
     public Map<String, Object> findByLeagueId(Integer leagueId) throws IOException {
         int seasonId = seasonService.findByLeagueId(leagueId).getSeasonId();
-        MatchResponse matchResponse = findBySeasonAndDate(seasonId, "2022-07-12", "2022-09-23");
+        LocalDate today = LocalDate.now();
+        MatchResponse matchResponse = findBySeasonAndDate(seasonId, today.toString(), today.plusMonths(1).toString());
         LeagueResponse leagueResponse = leagueService.findById(leagueId);
 
         return new HashMap() {
