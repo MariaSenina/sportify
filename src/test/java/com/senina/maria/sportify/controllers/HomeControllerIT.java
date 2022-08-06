@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("integration-test")
-public class HomeControllerIntegrationTest {
+public class HomeControllerIT {
     private static final String BASE_URL = "/";
 
     @Autowired

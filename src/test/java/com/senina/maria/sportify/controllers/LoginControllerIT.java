@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 // Reference: https://rieckpil.de/guide-to-springboottest-for-spring-boot-integration-tests/
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("integration-test")
-public class LoginControllerIntegrationTest {
+public class LoginControllerIT {
     private static final String BASE_URL = "/login";
 
     @Autowired
